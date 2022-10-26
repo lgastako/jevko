@@ -84,18 +84,7 @@ data Subjevko = Subjevko
   } deriving (Eq, Ord, Read, Show)
 
 subjevkoP :: Parser Subjevko
--- subjevkoP = Subjevko
---   <$> prefixP
---   <*> jevkoP
-subjevkoP = do
-  p <- prefixP
-  openerP
-  j <- jevkoP
-  closerP
-  pure $ Subjevko
-    { prefix = p
-    , jevko  = j
-    }
+subjevkoP = Subjevko <$> prefixP <*> (openerP *> jevkoP <* closerP)
 
 -- ================================================================
 -- ; aliases
@@ -150,6 +139,7 @@ delimiterP = do
   guard $ c `elem` delimiterChars
   pure c
 
+-- ================================================================
 -- ; Character is any code point which is not a Delimiter
 -- Character = %x0-5a / %x5c / %x5e-5f / %x61-10ffff
 
@@ -165,6 +155,7 @@ characterP = Character <$> do
 -- ================================================================
 -- Opener  = %x5b ; left square bracket
 --
+
 openerP :: Parser ()
 openerP = void . Atto.char $ openerChar
 
