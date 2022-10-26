@@ -1,12 +1,12 @@
 {-# LANGUAGE RecordWildCards #-}
+
 module Data.Jevko
   ( parse
   , parseMay
   , render
   ) where
 
-import qualified Data.Text as T
-
+import qualified Data.Text            as T
 import qualified Data.Attoparsec.Text as Atto
 
 import Control.Monad        ( guard
@@ -48,8 +48,8 @@ renderText = T.pack . concatMap f
   where
     f :: Symbol -> [Char]
     f (Character c)
-      | c `elem` delimiters = [escaperChar, c]
-      | otherwise           = [c]
+      | c `elem` delimiterChars = [escaperChar, c]
+      | otherwise               = [c]
 
 
 -- ================================================================
@@ -132,8 +132,12 @@ type Symbol = Character
 symbolP :: Parser Symbol
 symbolP = digraphP <|> characterP
 
-delimiters :: String
-delimiters = openerChar:closerChar:escaperChar:[]
+delimiterChars :: String
+delimiterChars =
+  [ openerChar
+  , closerChar
+  , escaperChar
+  ]
 
 digraphP :: Parser Character
 digraphP = Character <$> do
@@ -143,7 +147,7 @@ digraphP = Character <$> do
 delimiterP :: Parser Char
 delimiterP = do
   c <- anyChar
-  guard $ c `elem` delimiters
+  guard $ c `elem` delimiterChars
   pure c
 
 -- ; Character is any code point which is not a Delimiter
@@ -154,7 +158,7 @@ newtype Character = Character Char
 characterP :: Parser Character
 characterP = Character <$> do
   c <- anyChar
-  guard $ c `notElem` delimiters
+  guard $ c `notElem` delimiterChars
   pure c
 
 -- ================================================================
