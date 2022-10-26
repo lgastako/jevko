@@ -152,6 +152,7 @@ delimiterP = do
 
 -- ; Character is any code point which is not a Delimiter
 -- Character = %x0-5a / %x5c / %x5e-5f / %x61-10ffff
+
 newtype Character = Character Char
   deriving (Eq, Ord, Read, Show)
 
@@ -173,6 +174,7 @@ openerChar = '['
 -- ================================================================
 -- Closer  = %x5d ; right square bracket
 --
+
 closerP :: Parser ()
 closerP = void . char $ closerChar
 
