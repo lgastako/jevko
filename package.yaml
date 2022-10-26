@@ -1,7 +1,7 @@
-name:                jevko
-version:             0.1.0.0
+name:                "jevko"
+version:             "0.1.0.0"
 github:              "githubuser/jevko"
-license:             BSD3
+license:             "BSD3"
 author:              "Author name here"
 maintainer:          "example@example.com"
 copyright:           "2022 Author name here"
@@ -10,17 +10,15 @@ extra-source-files:
 - README.md
 - CHANGELOG.md
 
-# Metadata used when publishing your package
 # synopsis:            Short description of your package
 # category:            Web
 
-# To avoid duplicated efforts in documentation and dealing with the
-# complications of embedding Haddock markup inside cabal files, it is
-# common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/jevko#readme>
+description:         "README at <https://github.com/githubuser/jevko#readme>"
 
 dependencies:
-- base >= 4.7 && < 5
+- attoparsec
+- base               >= 4.7 && < 5
+- text
 
 ghc-options:
 - -Wall
@@ -37,7 +35,7 @@ library:
   source-dirs: src
 
 executables:
-  jevko-exe:
+  jevko:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -49,11 +47,16 @@ executables:
 
 tests:
   jevko-test:
-    main:                Spec.hs
+    main:                Driver.hs
     source-dirs:         test
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - QuickCheck
     - jevko
+    - tasty
+    - tasty-discover
+    - tasty-hspec
+    - tasty-quickcheck

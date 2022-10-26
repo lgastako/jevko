@@ -6,7 +6,7 @@ cabal-version: 1.12
 
 name:           jevko
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/jevko#readme>
+description:    README at <https://github.com/githubuser/jevko#readme>
 homepage:       https://github.com/githubuser/jevko#readme
 bug-reports:    https://github.com/githubuser/jevko/issues
 author:         Author name here
@@ -25,17 +25,19 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Data.Jevko
   other-modules:
       Paths_jevko
   hs-source-dirs:
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      attoparsec
+    , base >=4.7 && <5
+    , text
   default-language: Haskell2010
 
-executable jevko-exe
+executable jevko
   main-is: Main.hs
   other-modules:
       Paths_jevko
@@ -43,19 +45,28 @@ executable jevko-exe
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      attoparsec
+    , base >=4.7 && <5
     , jevko
+    , text
   default-language: Haskell2010
 
 test-suite jevko-test
   type: exitcode-stdio-1.0
-  main-is: Spec.hs
+  main-is: Driver.hs
   other-modules:
       Paths_jevko
   hs-source-dirs:
       test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , attoparsec
+    , base >=4.7 && <5
     , jevko
+    , tasty
+    , tasty-discover
+    , tasty-hspec
+    , tasty-quickcheck
+    , text
   default-language: Haskell2010
