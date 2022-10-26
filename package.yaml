@@ -1,19 +1,19 @@
 name:                "jevko"
 version:             "0.1.0.0"
-github:              "githubuser/jevko"
+github:              "lgastako/jevko"
 license:             "BSD3"
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2022 Author name here"
+author:              "John Evans"
+maintainer:          "lgastako@gmail.com"
+copyright:           "2022 John Evans"
 
 extra-source-files:
 - README.md
 - CHANGELOG.md
 
-# synopsis:            Short description of your package
-# category:            Web
+synopsis:            Jevko Parser
+category:            Text, Web
 
-description:         "README at <https://github.com/githubuser/jevko#readme>"
+description:         "README at <https://github.com/lgastako/jevko#readme>"
 
 dependencies:
 - attoparsec
